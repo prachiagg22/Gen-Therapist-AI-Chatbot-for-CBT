@@ -1,0 +1,244 @@
+{
+  "name": "Gen Therapist",
+  "nodes": [
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.chatTrigger",
+      "typeVersion": 1.4,
+      "position": [
+        0,
+        0
+      ],
+      "id": "a3804257-54b4-406e-8b60-9dec195117cf",
+      "name": "When chat message received",
+      "webhookId": "aaf0f200-955c-46f6-9215-aff27b4e0f19"
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "Hii",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 3,
+      "position": [
+        416,
+        0
+      ],
+      "id": "e8019bdf-0cd5-44fb-b77a-48d97ffd7b36",
+      "name": "AI Agent"
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatGoogleGemini",
+      "typeVersion": 1,
+      "position": [
+        336,
+        192
+      ],
+      "id": "5c6c533f-f547-4743-83e0-518e9812e972",
+      "name": "Google Gemini Chat Model",
+      "credentials": {
+        "googlePalmApi": {
+          "id": "R7Lijo7EgqJ0GQxF",
+          "name": "Google Gemini(PaLM) Api account 2"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "sessionIdType": "customKey",
+        "sessionKey": "hii"
+      },
+      "type": "@n8n/n8n-nodes-langchain.memoryBufferWindow",
+      "typeVersion": 1.3,
+      "position": [
+        432,
+        208
+      ],
+      "id": "ae61d9e6-5717-43ee-9523-2e8674536f69",
+      "name": "Simple Memory"
+    },
+    {
+      "parameters": {
+        "documentId": {
+          "__rl": true,
+          "value": "1r6mJJsVM5_kWSl0GRa1O1U3oz6u0FQkGrrASjS5wlvA",
+          "mode": "list",
+          "cachedResultName": "Student Stress Factors (2)",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1r6mJJsVM5_kWSl0GRa1O1U3oz6u0FQkGrrASjS5wlvA/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": 287324532,
+          "mode": "list",
+          "cachedResultName": "Student Stress Factors (2)",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1r6mJJsVM5_kWSl0GRa1O1U3oz6u0FQkGrrASjS5wlvA/edit#gid=287324532"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheetsTool",
+      "typeVersion": 4.7,
+      "position": [
+        576,
+        208
+      ],
+      "id": "06787296-e02e-4429-b4c0-2072896a7e07",
+      "name": "Get row(s) in sheet in Google Sheets",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "cPac2QvaLA5ZN8wW",
+          "name": "Google Sheets account 2"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "resource": "chat",
+        "chatId": "5037912716"
+      },
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1.2,
+      "position": [
+        768,
+        43.33333206176758
+      ],
+      "id": "c58d47c9-05d3-4a32-a3cb-3984f46dc2f2",
+      "name": "Get a chat",
+      "webhookId": "63e32729-09be-4a56-bc78-e094ab1a410e",
+      "credentials": {
+        "telegramApi": {
+          "id": "NJBuobsLlikjRvX2",
+          "name": "Telegram account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "updates": [
+          "message"
+        ],
+        "additionalFields": {}
+      },
+      "type": "n8n-nodes-base.telegramTrigger",
+      "typeVersion": 1.2,
+      "position": [
+        176,
+        96
+      ],
+      "id": "40381807-a54e-445f-9c6e-2f81ec9f4905",
+      "name": "Telegram Trigger",
+      "webhookId": "49da8d33-7f89-43b0-845e-e22690109c9d",
+      "credentials": {
+        "telegramApi": {
+          "id": "NJBuobsLlikjRvX2",
+          "name": "Telegram account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "path": "6c3b0349-0dff-4c11-8db5-7c0402af3ae4",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2.1,
+      "position": [
+        208,
+        0
+      ],
+      "id": "f2342a86-3601-4492-beef-293522feccbf",
+      "name": "Webhook",
+      "webhookId": "6c3b0349-0dff-4c11-8db5-7c0402af3ae4"
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "When chat message received": {
+      "main": [
+        []
+      ]
+    },
+    "Google Gemini Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Simple Memory": {
+      "ai_memory": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_memory",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get row(s) in sheet in Google Sheets": {
+      "ai_tool": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "AI Agent": {
+      "main": [
+        [
+          {
+            "node": "Get a chat",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Webhook": {
+      "main": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Telegram Trigger": {
+      "main": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "versionId": "67f6df24-5c7b-4314-bd44-009a1197ee24",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "4521629f57c40c68204d39a32cc66cfda01e2ef6a4e3f943b54891e9337555e4"
+  },
+  "id": "T1TLiVd33mZDmrIm",
+  "tags": []
+}
